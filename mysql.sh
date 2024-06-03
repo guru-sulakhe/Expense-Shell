@@ -38,7 +38,7 @@ VALIDATE $? "Starting mysql"
 #VALIDATE $? "Setting root password"
 
 #Below code is useful for idempotent nature
-mysql -h '3.80.130.70' -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h 172.31.18.26 -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
