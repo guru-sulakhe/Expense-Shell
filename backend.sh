@@ -46,3 +46,4 @@ then
     VALIDATE $? "Adding user expense"
 else
     echo "User is already created.. $Y SKIPPING $N"
+fi
