@@ -34,6 +34,15 @@ VALIDATE $? "Enablinng nodjes version 20"
 dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "Installing nodejs"
 
-useradd expense &>>$LOGFILE
-VALIDATE $? "Adding user expense"
+#useradd expense &>>$LOGFILE
+#VALIDATE $? "Adding user expense"
 
+#use the below code for idempotent nature in script
+
+id expense &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    useradd expense &>>$LOGFILE
+    VALIDATE $? "Adding user expense"
+else
+    echo "User is already created.. $Y SKIPPING $N"
