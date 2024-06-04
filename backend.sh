@@ -39,11 +39,11 @@ VALIDATE $? "Installing nodejs"
 
 #use the below code for idempotent nature in script
 
-id expense &>>$LOGFILE
-if [ $? -ne 0 ]
+id expense &>>$LOGFILE # this is used for checking whether the expense user is created or not,and analysing the exit status
+if [ $? -ne 0 ] #if the exit status is 1,then we need create expense user,if the exit status is 0 then expense user is already created skipping
 then
     useradd expense &>>$LOGFILE
     VALIDATE $? "Adding user expense"
 else
-    echo "User is already created.. $Y SKIPPING $N"
+    echo -e "User is already created.. $Y SKIPPING $N"
 fi
