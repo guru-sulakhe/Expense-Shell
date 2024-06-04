@@ -48,4 +48,5 @@ then
     VALIDATE $? "Setting root password"
 else
     echo -e "Root Password is already setup.. $Y SKPPING $N"
+fi
     
