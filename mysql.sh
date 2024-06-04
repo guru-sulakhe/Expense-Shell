@@ -8,6 +8,8 @@ R="\e[31m" #for red color
 G="\e[32m" #for green color
 Y="\e[33m"
 N="\e[0m" #for normal color
+echo "Please enter db password: "
+read -s mysql_root_password
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -38,8 +40,9 @@ VALIDATE $? "Starting mysql"
 #VALIDATE $? "Setting root password"
 
 #Below code is useful for idempotent nature
-mysql -h 3.80.130.70 -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
-if [ $? -ne 0 ]
+#mysql -h db.guru97s.cloud -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE instead of using the password ExpenseApp@1 which is hard coded,we are creating a variable such as db_password which is given during running the script
+mysql -h db.guru97s.cloud -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
+if [ $? -ne 0 ] #if exit status is 1 then we need to setup a new password,if it is 0 then password is already setup
 then
     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
     VALIDATE $? "Setting root password"
