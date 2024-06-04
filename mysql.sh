@@ -44,7 +44,7 @@ VALIDATE $? "Starting mysql"
 mysql -h db.guru97s.cloud -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ] #if exit status is 1 then we need to setup a new password,if it is 0 then password is already setup
 then
-    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+    mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$LOGFILE
     VALIDATE $? "Setting root password"
 else
     echo -e "Root Password is already setup.. $Y SKPPING $N"
