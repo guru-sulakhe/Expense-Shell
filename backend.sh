@@ -54,7 +54,7 @@ mkdir -p /app &>>$LOGFILE
 VALIDATE $? "creating app directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOGFILE
-VALIDATE $? "Downloading the application code on app directory"
+VALIDATE $? "downloading the web content to the app directory"
 
 cd /app
 rm -rf /app/* #Removing previous content and adding new content
