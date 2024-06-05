@@ -37,19 +37,19 @@ VALIDATE $? "Enabling nginx"
 systemctl start nginx &>>$LOGFILE
 VALIDATE $? "Starting nginx"
 
-rm -rf /usr/share/nginx/html/* 
+rm -rf /usr/share/nginx/html/* &>>$LOGFILE
 VALIDATE $? "Removing the default content"
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOGFILE
 VALIDATE $? "Downloading the frontend content in tmp directory"
 
-cd /usr/share/nginx/html
-unzip /tmp/frontend.zip
+cd /usr/share/nginx/html 
+unzip /tmp/frontend.zip &>>$LOGFILE
 VALIDATE $? "unzipping the fronend content in usr directory"
 
 #check your repo and path
 cp /home/ec2-user/Expense-shell/expense.conf /etc/nginx/default.d/expense.conf  #epense.conf consists of api calling to the backend server
 VALIDATE $? "Copied expense conf"
 
-systemctl restart nginx
+systemctl restart nginx &>>$LOGFILE
 VALIDATE $? "Restarting nginx"
