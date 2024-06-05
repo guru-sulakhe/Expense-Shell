@@ -47,3 +47,9 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 VALIDATE $? "unzipping the fronend content in usr directory"
 
+#check your repo and path
+cp /home/ec2-user/Expense-shell/expense.conf /etc/nginx/default.d/expense.conf  #epense.conf consists of api calling to the backend server
+VALIDATE $? "Copied expense conf"
+
+systemctl restart nginx
+VALIDATE $? "Restarting nginx"
